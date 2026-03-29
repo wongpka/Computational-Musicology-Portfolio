@@ -1,19 +1,17 @@
-# Quarto Website
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - music_dashboard.qmd
 
-# Define the site
 website:
   title: "Computational Musicology"
   description: "A Quarto website for Computational Musicology project"
-  output-dir: "_site"
-
-# Include content
-includepaths: ["./"]
-
-# Add pages
-navbar:
-  title: "Computational Musicology"
-  right:
-    - text: "Home"
-      href: index.qmd
-    - text: "Music Dashboard"
-      href: music_dashboard.qmd
+  navbar:
+    title: "Computational Musicology"
+    right:
+      - text: "Home"
+        href: index.qmd
+      - text: "Music Dashboard"
+        href: music_dashboard.qmd
