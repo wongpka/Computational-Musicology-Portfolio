@@ -33,7 +33,8 @@ tracks <- bind_rows(kpop, cantopop) |>
   mutate(
     release_date = as.Date(release_date),
     duration_min = duration_ms / 60000
-  )
+  ) |>
+  rename(artist_names = artist_name_s)
 
 numeric_features <- c("danceability", "energy", "valence", "tempo", "loudness", "acousticness", "speechiness", "liveness", "duration_min", "popularity")
 
@@ -42,7 +43,7 @@ feature_long <- tracks |>
   pivot_longer(-collection, names_to = "feature", values_to = "value")
 
 top_artists <- tracks |>
-  count(collection, artist_name_s, sort = TRUE) |>
+  count(collection, artist_names, sort = TRUE) |>
   group_by(collection) |>
   slice_head(n = 10) |>
   ungroup()
@@ -54,7 +55,7 @@ top_artists <- tracks |>
 
 ```{r}
 track_n <- nrow(tracks)
-artist_n <- tracks |> distinct(artist_name_s) |> nrow()
+artist_n <- tracks |> distinct(artist_names) |> nrow()
 avg_pop <- mean(tracks$popularity, na.rm = TRUE)
 
 summary_tbl <- tibble(
@@ -65,7 +66,7 @@ summary_tbl <- tibble(
 knitr::kable(summary_tbl)
 ```
 
-### Tracks added over release years
+### Tracks by release year
 
 ```{r}
 tracks |>
@@ -118,7 +119,7 @@ tracks |>
 
 ```{r}
 top_artists |>
-  ggplot(aes(x = reorder(artist_name_s, n), y = n, fill = collection)) +
+  ggplot(aes(x = reorder(artist_names, n), y = n, fill = collection)) +
   geom_col(show.legend = FALSE) +
   facet_wrap(~ collection, scales = "free_y") +
   coord_flip() +
@@ -130,7 +131,7 @@ top_artists |>
 
 ```{r}
 tracks |>
-  select(collection, track_name, artist_name_s, release_date, popularity, danceability, energy, valence, tempo, loudness) |>
+  select(collection, track_name, artist_names, release_date, popularity, danceability, energy, valence, tempo, loudness) |>
   arrange(collection, desc(popularity)) |>
   slice_head(n = 30) |>
   knitr::kable()
