@@ -57,9 +57,12 @@ track_n <- nrow(tracks)
 artist_n <- tracks |> distinct(artist_name_s) |> nrow()
 avg_pop <- mean(tracks$popularity, na.rm = TRUE)
 
-valuebox(track_n, "Total tracks")
-valuebox(artist_n, "Unique artists")
-valuebox(number(avg_pop, accuracy = 0.1), "Average popularity")
+summary_tbl <- tibble(
+  Metric = c("Total tracks", "Unique artists", "Average popularity"),
+  Value = c(track_n, artist_n, number(avg_pop, accuracy = 0.1))
+)
+
+knitr::kable(summary_tbl)
 ```
 
 ### Tracks added over release years

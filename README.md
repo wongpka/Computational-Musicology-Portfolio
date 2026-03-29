@@ -6,15 +6,15 @@ Assignment for 115215146Y Computational Musicology
 
 Dashboard file:
 
-- `/home/runner/work/Computational-Musicology/Computational-Musicology/music_dashboard.qmd`
+- `music_dashboard.qmd`
 
 It currently uses only existing fields from:
 
-- `/home/runner/work/Computational-Musicology/Computational-Musicology/kpop_2020s.csv`
-- `/home/runner/work/Computational-Musicology/Computational-Musicology/cantopop_2020s.csv`
+- `kpop_2020s.csv`
+- `cantopop_2020s.csv`
 
 Render locally from the repository root:
 
 ```bash
-quarto render /home/runner/work/Computational-Musicology/Computational-Musicology/music_dashboard.qmd
+quarto render music_dashboard.qmd
 ```
